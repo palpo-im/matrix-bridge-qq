@@ -1,0 +1,39 @@
+homeserver:
+  address: http://127.0.0.1:8008
+  domain: example.com
+
+appservice:
+  address: http://127.0.0.1:17779
+  hostname: 0.0.0.0
+  port: 17779
+  database:
+    type: sqlite
+    uri: sqlite://matrix-bridge-qq.db
+    max_open_conns: 20
+    max_idle_conns: 2
+  id: qq
+  bot:
+    username: qqbot
+    displayname: QQ bridge bot
+    avatar:
+  as_token: "replace-with-as-token"
+  hs_token: "replace-with-hs-token"
+
+bridge:
+  username_template: "_qq_{{.}}"
+  command_prefix: "!qq"
+  private_room_name_template: "QQ Private {{chat_id}}"
+  group_room_name_template: "QQ Group {{chat_id}}"
+  onebot:
+    api_base: "http://127.0.0.1:5700"
+    event_path: "/qq/events"
+    listen_secret: "replace-with-onebot-secret"
+    access_token: "replace-with-onebot-access-token"
+    self_id: "123456789"
+    ignore_own_messages: true
+  permissions:
+    "example.com": "user"
+    "@admin:example.com": "admin"
+
+logging:
+  min_level: info

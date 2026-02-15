@@ -1,0 +1,9 @@
+/target
+**/*.rs.bk
+Cargo.lock
+config.yaml
+*.db
+logs
+
+.claude/
+nul
