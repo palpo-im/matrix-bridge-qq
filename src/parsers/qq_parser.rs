@@ -378,7 +378,24 @@ mod tests {
                 as_token: "token".to_string(),
                 hs_token: "token".to_string(),
             },
-            bridge: crate::config::BridgeConfig::default(),
+            bridge: crate::config::BridgeConfig {
+                username_template: "_qq_{{.}}".to_string(),
+                command_prefix: "!qq".to_string(),
+                private_room_name_template: "QQ Private {{chat_id}}".to_string(),
+                group_room_name_template: "QQ Group {{chat_id}}".to_string(),
+                onebot: crate::config::OneBotConfig {
+                    api_base: "http://localhost:5700".to_string(),
+                    event_path: "/qq/events".to_string(),
+                    listen_secret: None,
+                    access_token: None,
+                    self_id: None,
+                    ignore_own_messages: true,
+                },
+                permissions: std::collections::HashMap::from([(
+                    "*".to_string(),
+                    "admin".to_string(),
+                )]),
+            },
             logging: None,
         })
     }

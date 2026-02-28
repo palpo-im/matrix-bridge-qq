@@ -257,7 +257,6 @@ impl MatrixToQQConverter {
                     segments.push(super::common::QQSegment::text(&parsed.body));
                 }
             }
-            MessageType::Forward => {}
         }
 
         segments

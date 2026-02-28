@@ -1,6 +1,6 @@
 use chrono::{DateTime, Utc};
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum MessageType {
     Text,
     Image,
@@ -165,7 +165,7 @@ pub struct QQSegment {
     pub data: serde_json::Map<String, serde_json::Value>,
 }
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, PartialEq, Eq)]
 pub enum QQSegmentType {
     Text,
     At,
