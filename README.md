@@ -51,7 +51,7 @@ cargo run -- --config config.yaml
 ## 技术栈
 
 - Web 框架：`salvo`
-- 数据库：`sqlx`（SQLite / PostgreSQL）
+- 数据库：`diesel`（SQLite / PostgreSQL）
 - Matrix 交互：AppService + Client-Server API（AS Token）
 - QQ 交互：OneBot v11 HTTP API + 反向 HTTP 事件
 

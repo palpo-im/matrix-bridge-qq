@@ -2,6 +2,7 @@ pub mod bridge;
 pub mod config;
 pub mod database;
 pub mod matrix;
+pub mod parsers;
 pub mod qq;
 
 pub const NAME: &str = "matrix-bridge-qq";
