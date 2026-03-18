@@ -55,6 +55,62 @@ cargo run -- --config config.yaml
 - Matrix 交互：AppService + Client-Server API（AS Token）
 - QQ 交互：OneBot v11 HTTP API + 反向 HTTP 事件
 
+## Palpo KDL 配置
+
+使用 Palpo 时，可以在 `palpo.kdl` 中配置：
+
+```kdl
+server_name "example.com"
+appservice_registration_dir "appservices"
+```
+
+桥接配置文件 `config.example.kdl`（完整选项参见根目录的 `config.example.kdl`）：
+
+```kdl
+// Matrix QQ Bridge Configuration (KDL format)
+
+homeserver {
+    address "http://127.0.0.1:8008"
+    domain "example.com"
+}
+
+appservice {
+    id "qq"
+    as_token "put_your_as_token_here"
+    hs_token "put_your_hs_token_here"
+    port 17779
+    database {
+        type "sqlite"
+        uri "sqlite://matrix-bridge-qq.db"
+    }
+    bot {
+        username "qqbot"
+        displayname "QQ bridge bot"
+    }
+}
+
+bridge {
+    username_template "_qq_{{.}}"
+    command_prefix "!qq"
+    onebot {
+        api_base "http://127.0.0.1:5700"
+        event_path "/qq/events"
+        listen_secret "replace-with-onebot-secret"
+        access_token "replace-with-onebot-access-token"
+        self_id "123456789"
+        ignore_own_messages true
+    }
+    permissions {
+        "example.com" "user"
+        "@admin:example.com" "admin"
+    }
+}
+
+logging {
+    min_level "info"
+}
+```
+
 ## 后续可扩展
 
 - 媒体消息（图片/文件/语音）

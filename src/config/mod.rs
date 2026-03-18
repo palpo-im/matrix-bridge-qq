@@ -1,4 +1,5 @@
 mod bridge;
+mod kdl_support;
 
 pub use bridge::*;
 
@@ -75,7 +76,11 @@ pub struct Config {
 impl Config {
     pub fn load(path: &str) -> Result<Self> {
         let content = std::fs::read_to_string(path)?;
-        let config: Config = serde_yaml::from_str(&content)?;
+        let config: Config = if kdl_support::is_kdl_file(std::path::Path::new(path)) {
+            kdl_support::parse_kdl_config(&content).map_err(|e| anyhow::anyhow!(e))?
+        } else {
+            serde_yaml::from_str(&content)?
+        };
         config.validate()?;
         Ok(config)
     }
